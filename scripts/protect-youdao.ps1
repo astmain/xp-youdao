@@ -120,6 +120,26 @@ else {
     Say 'registry Install: already points to this repo'
 }
 
+# ---- Housekeeping: keep shortcuts / startup / uninstall pointing here --
+$uninstKey = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\' +
+             [string]::new([char[]]@(0x7F51,0x6613,0x6709,0x9053,0x8BCD,0x5178))
+if (Test-Path $uninstKey) {
+    $uninstExe = Join-Path $RepoRoot 'uninst.exe'
+    $p = Get-ItemProperty -LiteralPath $uninstKey
+    if ($p.UninstallString -notlike "*$RepoRoot*") {
+        Set-ItemProperty -LiteralPath $uninstKey -Name 'UninstallString' -Value ('"' + $uninstExe + '"') -Force
+        Set-ItemProperty -LiteralPath $uninstKey -Name 'DisplayIcon' -Value ($RepoRoot + '\YoudaoDict.exe,0') -Force
+        Say 'uninstall entry: repointed to this repo'
+    }
+}
+
+$runKey = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run'
+$runVal = (Get-ItemProperty -Path $runKey -ErrorAction SilentlyContinue).YoudaoDict
+if ($runVal -and $runVal -notlike "*$RepoRoot*") {
+    Set-ItemProperty -Path $runKey -Name 'YoudaoDict' -Value ('"' + (Join-Path $RepoRoot 'YoudaoDict.exe') + '" -hide -autostart') -Force
+    Say 'startup entry: repointed to this repo'
+}
+
 if (-not $Quiet) {
     Write-Host 'Done. Version is pinned to 8.10.x.' -ForegroundColor Green
 }

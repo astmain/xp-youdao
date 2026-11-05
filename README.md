@@ -17,6 +17,12 @@ cd xp-youdao
 
 仓库放在哪个目录都行，路径含中文或空格也没问题。
 
+想让它出现在桌面/开始菜单，再执行一次：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install-shortcuts.ps1
+```
+
 ## 为什么要锁定版本
 
 程序启动后会在后台拉起升级器 `0YoudaoDictUpt.exe`，从 `cidian.youdao.com/apps/update5/dictupdate.xml` 拉取版本信息，把新版下载成 `YoudaoDict.exe.new`，下次启动时替换掉自己。
@@ -31,6 +37,8 @@ cd xp-youdao
 
 实测：只做第 1 道锁时，程序运行约 30 分钟会自己把 `AUTOUPDATE` 改回 1 并开始下载。加上第 2 道锁后，多轮冷启动加长时间运行都没有再出现 `.new` 文件或升级进程。
 
+顺带还会把开机自启动项、卸载入口、开始菜单快捷方式都指回本仓库，避免它们停留在 `%LOCALAPPDATA%\Youdao\Dict\Application` 这个会被自动更新删掉的旧目录。
+
 ## 目录结构
 
 ```
@@ -44,7 +52,8 @@ xp-youdao/
 ├─ start-youdao.cmd        一键启动（推荐）
 ├─ scripts/
 │   ├─ start-youdao.ps1    启动逻辑
-│   └─ protect-youdao.ps1  版本锁定（幂等，可单独运行）
+│   ├─ protect-youdao.ps1  版本锁定（幂等，可单独运行）
+│   └─ install-shortcuts.ps1  创建桌面/开始菜单快捷方式
 ├─ .gitattributes          二进制不做换行转换 + LFS 规则
 └─ .gitignore              排除日志、升级包、用户数据
 ```

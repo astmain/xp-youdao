@@ -1,0 +1,45 @@
+# =====================================================================
+# 有道词典 8.10.8.0 - 版本锁定仓库
+#
+# 原则：只提交"程序本体 + 启动脚本/说明"，不提交运行期产生的垃圾。
+# 这样仓库随时 clone 下来就能直接跑，不会被几十 MB 日志和
+# 自动更新下载的 .new 安装包污染。
+# =====================================================================
+
+# --- 运行期日志：程序每次启动都会写，单文件可达数百 MB ---
+debug.log
+*.log
+logs/
+CrashRpt/
+CrashStatistics/
+CrashAutoQuit/
+
+# --- 自动更新下载的临时产物：绝不能提交 ---
+*.new
+*.ydtmp
+*.Uptold
+updateinfo.ini
+/11.*/
+/stable11.*/
+
+# --- 用户私有数据：换电脑时不要把旧机器配置覆盖新机器 ---
+profile/config.ini
+cookies.dat
+user_pic/
+WordSound/
+WbData/
+dladdin/
+popup.ini
+tooltip_config.ini
+nowordstroke.xml
+resource.ini
+wb_config.ini
+dict.cache/
+Dictionary/
+guid.dat
+vendor.dat
+
+# --- 本地备份 / 解压中间目录 ---
+_backup/
+.youdao-backup/
+

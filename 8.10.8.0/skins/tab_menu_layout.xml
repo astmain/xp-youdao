@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<TabMenuWnd>
+	<Version>1.0</Version>
+	<WinHeight>90</WinHeight>
+	<WinWidth>130</WinWidth>
+	<Layout>	
+	    <HBoxLayout SizePolicy="Spring;Spring" Background="#FFFFFF">	
+		    <Space Name="LeftFrame" Size="1"/>
+            <VBoxLayout SizePolicy="Spring;Spring">
+            <Space Name="TopFrame" Size="1"/>
+            <PushAttr SizePolicy="Spring;Fix" Background="#FFFFFF;#F2F2F2" Height="44"/>
+			
+			<PushAttr TextColor="#666666;#333333" FontFamily="微软雅黑" FontSize="14" TextMargin="41"/>
+
+			<MenuItem Name="AsrTab" Text="@AsrTabText" NormalIcon="tc.png;tc-hover.png"  IconWidth="20" IconHeight="20" IconAlign="Left" IconMargin="14"/>
+			<MenuItem Name="WriterTab" Text="@WriterTabText" NormalIcon="yd-writer.png;yd-writer-hover.png" IconWidth="20" IconHeight="20" IconAlign="Left" IconMargin="14"/>
+			<Spring/>
+                
+		    <Space Name="BottomFrame" Size="1"/>
+            </VBoxLayout>
+            <Space Name="RightFrame" Size="1"/>
+        </HBoxLayout>
+	</Layout>
+</TabMenuWnd>

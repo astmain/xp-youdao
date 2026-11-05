@@ -1,0 +1,9 @@
+{
+  "name": "com.youdao.cidian.chrome_proxy_extension",
+  "description": "Youdao Dict Academic Acceleration Native Messaging API Host For Chrome",
+  "path": "YoudaoAcademic.exe",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://igijnnemfbnjppjnjniogeakcidpcfkn/"
+  ]
+}

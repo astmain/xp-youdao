@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LanguageSelectWnd>
+	<Version>1.0</Version>
+	<WinHeight>188</WinHeight>
+	<WinWidth>408</WinWidth>
+	<WinExpHeight>450</WinExpHeight>
+	<WinExpWidth>408</WinExpWidth>
+	<NormalGap>19</NormalGap>
+	<ExpandGap>7</ExpandGap>
+	<Layout>
+		<VBoxLayout SizePolicy="Spring;Spring" Background="#E5E5E5">
+		<Space Name="TopFrame" Size="1"/>
+		<HBoxLayout SizePolicy="Spring;Spring">
+		<Space Name="LeftFrame" Size="1"/>
+		
+		<PushAttr Background="#FFFFFF"/>
+		<VBoxLayout SizePolicy="Spring;Spring">
+			<Space Size="19"/>
+			<HBoxLayout SizePolicy="Spring;Fix" Height="13">
+				<Space Size="20"/>
+				<TextButton Text="@LangMostUsed" SizePolicy="Auto;Auto" Enabled="False" FontSize="11" FontFamily="微软雅黑" TextColor="#999999"/>
+				<Spring/>
+			</HBoxLayout>
+			<Space Size="14"/>
+			<PushAttr ExcluseId="0" SizePolicy="Auto;Auto"/>
+			<PushAttr TextAlign="Left" FontFamily="微软雅黑" FontSize="13" TextColor="#666666;#D20A0A"/>
+			<HBoxLayout SizePolicy="Spring;Fix" Height="15">
+				<Space Size="20"/>
+				<TextButton Name="$auto" Text="@LangAuto" Actived="True"/>
+				<Space Size="20"/>
+				<TextButton Name="$en" Text="@LangEng"/>
+				<Space Size="20"/>
+				<TextButton Name="$fr" Text="@LangFrc"/>
+				<Space Size="20"/>
+				<TextButton Name="$ko" Text="@LangKor"/>
+				<Space Size="20"/>
+				<TextButton Name="$ja" Text="@LangJap"/>
+				<Spring/>
+			</HBoxLayout>
+			<Space Size="10"/>
+			<HBoxLayout SizePolicy="Spring;Fix" Height="15">
+				<Space Size="20"/>
+				<TextButton Name="$de" Text="@LangGmn"/>
+				<Space Size="46"/>
+				<TextButton Name="$ru" Text="@LangRss"/>
+				<Space Size="20"/>
+				<TextButton Name="$pt" Text="@LangPtg"/>
+				<Space Size="20"/>
+				<TextButton Name="$es" Text="@LangSpn"/>
+				<Spring/>
+			</HBoxLayout>
+			<PopAttr ExcluseId="" SizePolicy=""/>
+			<PopAttr TextAlign="" FontFamily="" FontSize="" TextColor=""/>
+			<Space Size="19"/>
+			<HBoxLayout SizePolicy="Spring;Fix" Height="1">
+				<Space Size="20"/>
+				<Separator SizePolicy="Spring;Fix" Height="1" Background="#F0F0F0"/>
+				<Space Size="20"/>
+			</HBoxLayout>
+			<Space Size="19"/>
+			<HBoxLayout SizePolicy="Spring;Fix" Height="13">
+				<Space Size="20"/>
+				<TextButton Text="@LangCustom" SizePolicy="Auto;Auto" FontFamily="微软雅黑" Enabled="False" FontSize="11" TextColor="#999999"/>
+				<Spring/>
+			</HBoxLayout>
+			<Space Size="15"/>
+			<HBoxLayout Name="CustomLangIndicator" SizePolicy="Spring;Fix" Height="15">
+				<Space Size="20"/>
+				<PushAttr ExcluseId="0" Icon="lang-drop.png;lang-drop-red.png;lang-drop-red.png;lang-drop-disabled.png" IconMargin="8" IconAlign="Left"/>
+				<PushAttr TextAlign="Left" FontFamily="微软雅黑" TextMargin="0" FontSize="13" TextColor="#666666;#D20A0A"/>
+				<TextButton Shared="True" Name="LangSrcIndicator" IconWidth="8" IconHeight="4" SizePolicy="Auto;Auto" Text="@LangSelectorDefaultText"/>
+				<Space Size="28"/>
+				<IconButton Name="LangExchanger" Width="20" Height="14" Icon="transfer.png;transfer-hover.png"/>
+				<Space Size="28"/>
+				<TextButton Shared="True" Name="LangDstIndicator" IconWidth="8" IconHeight="4" SizePolicy="Auto;Auto" Text="@LangSelectorDefaultText"/>
+				<Spring/>
+				<PopAttr Icon="" IconMargin="" IconAlign=""/>
+				<PopAttr TextAlign="" FontFamily="" TextMargin="" FontSize="" TextColor=""/>
+			</HBoxLayout>
+			<Space Name="ExpandGap" Size="19"/>
+			<VBoxLayout Name="ExpandPart" SizePolicy="Spring;Spring" Visible="False">
+				<PushAttr Background="#F7F7F7"/>
+				<ArrowSeparator Name="ExpandSep" SizePolicy="Spring;Fix" Height="8" ArrowSize="10;6" Background="#FFFFFF" Color="#F7F7F7" StrokeWidth="1" StrokeColor="#F0F0F0"/>
+				<VBoxLayout SizePolicy="Spring;Fix" Height="14">
+				</VBoxLayout>
+				<HBoxLayout SizePolicy="Spring;Spring">
+					<ScrollArea Name="LangList" SizePolicy="Spring;Spring">
+						<HBoxLayout SizePolicy="Auto;Auto">
+							<PushAttr ExcluseId="1" SizePolicy="Fix;Fix" Width="117" Height="12" TextAlign="Left" AutoTrancate="False"/>
+							<PushAttr FontFamily="微软雅黑" FontSize="12" TextColor="#666666;#D20A0A;#D20A0A;#CCCCCC"/>
+							<Space Size="20"/>
+							<VBoxLayout SizePolicy="Fix;Auto" Width="117">
+								<TextButton Name="ar" Text="@LangAr"/>
+								<Space Size="12"/>
+								<TextButton Name="az" Text="@LangAz"/>
+								<Space Size="12"/>
+								<TextButton Name="eu" Text="@LangEu"/>
+								<Space Size="12"/>
+								<TextButton Name="is" Text="@LangIs"/>
+								<Space Size="12"/>
+								<TextButton Name="fa" Text="@LangFa"/>
+								<Space Size="12"/>
+								<TextButton Name="ru" Text="@LangRu"/>
+								<Space Size="12"/>
+								<TextButton Name="fi" Text="@LangFi"/>
+								<Space Size="12"/>
+								<TextButton Name="ka" Text="@LangKa"/>
+								<Space Size="12"/>
+								<TextButton Name="ht" Text="@LangHt"/>
+								<Space Size="12"/>
+								<TextButton Name="nl" Text="@LangNl"/>
+								<Space Size="12"/>
+								<TextButton Name="ca" Text="@LangCa"/>
+								<Space Size="12"/>
+								<TextButton Name="co" Text="@LangCo"/>
+								<Space Size="12"/>
+								<TextButton Name="otq" Text="@LangOtq"/>
+								<Space Size="12"/>
+								<TextButton Name="lv" Text="@LangLv"/>
+								<Space Size="12"/>
+								<TextButton Name="lb" Text="@LangLb"/>
+								<Space Size="12"/>
+								<TextButton Name="mt" Text="@LangMt"/>
+								<Space Size="12"/>
+								<TextButton Name="ms" Text="@LangMs"/>
+								<Space Size="12"/>
+								<TextButton Name="mn" Text="@LangMn"/>
+								<Space Size="12"/>
+								<TextButton Name="mww" Text="@LangMww"/>
+								<Space Size="12"/>
+								<TextButton Name="zu" Text="@LangZu"/>
+								<Space Size="12"/>
+								<TextButton Name="pa" Text="@LangPa"/>
+								<Space Size="12"/>
+								<TextButton Name="ny" Text="@LangNy"/>
+								<Space Size="12"/>
+								<TextButton Name="sm" Text="@LangSm"/>
+								<Space Size="12"/>
+								<TextButton Name="st" Text="@LangSt"/>
+								<Space Size="12"/>
+								<TextButton Name="sk" Text="@LangSk"/>
+								<Space Size="12"/>
+								<TextButton Name="gd" Text="@LangGd"/>
+								<Space Size="12"/>
+								<TextButton Name="te" Text="@LangTe"/>
+								<Space Size="12"/>
+								<TextButton Name="tr" Text="@LangTr"/>
+								<Space Size="12"/>
+								<TextButton Name="uk" Text="@LangUk"/>
+								<Space Size="12"/>
+								<TextButton Name="he" Text="@LangHe"/>
+								<Space Size="12"/>
+								<TextButton Name="sd" Text="@LangSd"/>
+								<Space Size="12"/>
+								<TextButton Name="ceb" Text="@LangCeb"/>
+								<Space Size="12"/>
+								<TextButton Name="it" Text="@LangIt"/>
+								<Space Size="12"/>
+								<TextButton Name="id" Text="@LangId"/>
+								<Space Size="12"/>
+								<TextButton Name="en" Text="@LangEn"/>
+								<Space Size="12"/>
+								<TextButton Name="vi" Text="@LangVi"/>
+							</VBoxLayout>
+							<Space Size="12"/>
+							<VBoxLayout SizePolicy="Fix;Auto" Width="117">
+							　	<TextButton Name="sq" Text="@LangSq"/>
+								<Space Size="12"/>
+							　	<TextButton Name="ga" Text="@LangGa"/>
+							　	<Space Size="12"/>
+								<TextButton Name="be" Text="@LangBe"/>
+								<Space Size="12"/>
+							　	<TextButton Name="pl" Text="@LangPl"/>
+								<Space Size="12"/>
+							　	<TextButton Name="da" Text="@LangDa"/>
+							　	<Space Size="12"/>
+								<TextButton Name="fr" Text="@LangFr"/>
+								<Space Size="12"/>
+							　	<TextButton Name="fy" Text="@LangFy"/>
+								<Space Size="12"/>
+							　	<TextButton Name="gu" Text="@LangGu"/>
+								<Space Size="12"/>
+							　	<TextButton Name="ko" Text="@LangKo"/>
+								<Space Size="12"/>
+							　	<TextButton Name="ky" Text="@LangKy"/>
+								<Space Size="12"/>
+							　	<TextButton Name="cs" Text="@LangCs"/>
+								<Space Size="12"/>
+							　	<TextButton Name="tlh" Text="@LangTlh"/>
+								<Space Size="12"/>
+							　	<TextButton Name="ku" Text="@LangKu"/>
+								<Space Size="12"/>
+							　	<TextButton Name="lo" Text="@LangLo"/>
+								<Space Size="12"/>
+							　	<TextButton Name="ro" Text="@LangRo"/>
+								<Space Size="12"/>
+							　	<TextButton Name="mr" Text="@LangMr"/>
+								<Space Size="12"/>
+							　	<TextButton Name="mk" Text="@LangMk"/>
+								<Space Size="12"/>
+							　	<TextButton Name="bn" Text="@LangBn"/>
+								<Space Size="12"/>
+							　	<TextButton Name="hmn" Text="@LangHmn"/>
+								<Space Size="12"/>
+							　	<TextButton Name="ne" Text="@LangNe"/>
+								<Space Size="12"/>
+							　	<TextButton Name="pt" Text="@LangPt"/>
+								<Space Size="12"/>
+							　	<TextButton Name="ja" Text="@LangJa"/>
+								<Space Size="12"/>
+							　	<TextButton Name="sr-Latn" Text="@LangSr-Latn"/>
+								<Space Size="12"/>
+							　	<TextButton Name="si" Text="@LangSi"/>
+								<Space Size="12"/>
+							　	<TextButton Name="sl" Text="@LangSl"/>
+								<Space Size="12"/>
+							　	<TextButton Name="so" Text="@LangSo"/>
+								<Space Size="12"/>
+							　	<TextButton Name="ta" Text="@LangTa"/>
+								<Space Size="12"/>
+							　	<TextButton Name="cy" Text="@LangCy"/>
+								<Space Size="12"/>
+							　	<TextButton Name="uz" Text="@LangUz"/>
+								<Space Size="12"/>
+							　	<TextButton Name="el" Text="@LangEl"/>
+								<Space Size="12"/>
+							　	<TextButton Name="hu" Text="@LangHu"/>
+								<Space Size="12"/>
+							　	<TextButton Name="hy" Text="@LangHy"/>
+								<Space Size="12"/>
+							　	<TextButton Name="yi" Text="@LangYi"/>
+								<Space Size="12"/>
+							　	<TextButton Name="su" Text="@LangSu"/>
+								<Space Size="12"/>
+							　	<TextButton Name="yua" Text="@LangYua"/>
+								<Space Size="12"/>
+							　	<TextButton Name="zh-CHS" Text="@LangZh-CHS"/>
+							</VBoxLayout>
+							<Space Size="12"/>
+							<VBoxLayout SizePolicy="Fix;Auto" Width="117">
+								<TextButton Name="am" Text="@LangAm"/>
+								<Space Size="12"/>
+								<TextButton Name="et" Text="@LangEt"/>
+								<Space Size="12"/>
+								<TextButton Name="bg" Text="@LangBg"/>
+								<Space Size="12"/>
+								<TextButton Name="bs" Text="@LangBs"/>
+								<Space Size="12"/>
+								<TextButton Name="de" Text="@LangDe"/>
+								<Space Size="12"/>
+								<TextButton Name="tl" Text="@LangTl"/>
+								<Space Size="12"/>
+								<TextButton Name="km" Text="@LangKm"/>
+								<Space Size="12"/>
+								<TextButton Name="kk" Text="@LangKk"/>
+								<Space Size="12"/>
+								<TextButton Name="ha" Text="@LangHa"/>
+								<Space Size="12"/>
+								<TextButton Name="gl" Text="@LangGl"/>
+								<Space Size="12"/>
+								<TextButton Name="kn" Text="@LangKn"/>
+								<Space Size="12"/>
+								<TextButton Name="hr" Text="@LangHr"/>
+								<Space Size="12"/>
+								<TextButton Name="la" Text="@LangLa"/>
+								<Space Size="12"/>
+								<TextButton Name="lt" Text="@LangLt"/>
+								<Space Size="12"/>
+								<TextButton Name="mg" Text="@LangMg"/>
+								<Space Size="12"/>
+								<TextButton Name="ml" Text="@LangMl"/>
+								<Space Size="12"/>
+								<TextButton Name="mi" Text="@LangMi"/>
+								<Space Size="12"/>
+								<TextButton Name="my" Text="@LangMy"/>
+								<Space Size="12"/>
+								<TextButton Name="xh" Text="@LangXh"/>
+								<Space Size="12"/>
+								<TextButton Name="no" Text="@LangNo"/>
+								<Space Size="12"/>
+								<TextButton Name="ps" Text="@LangPs"/>
+								<Space Size="12"/>
+								<TextButton Name="sv" Text="@LangSv"/>
+								<Space Size="12"/>
+								<TextButton Name="sr-Cyrl" Text="@LangSr-Cyrl"/>
+								<Space Size="12"/>
+								<TextButton Name="eo" Text="@LangEo"/>
+								<Space Size="12"/>
+								<TextButton Name="sw" Text="@LangSw"/>
+								<Space Size="12"/>
+								<TextButton Name="tg" Text="@LangTg"/>
+								<Space Size="12"/>
+								<TextButton Name="th" Text="@LangTh"/>
+								<Space Size="12"/>
+								<TextButton Name="ur" Text="@LangUr"/>
+								<Space Size="12"/>
+								<TextButton Name="es" Text="@LangEs"/>
+								<Space Size="12"/>
+								<TextButton Name="haw" Text="@LangHaw"/>
+								<Space Size="12"/>
+								<TextButton Name="sn" Text="@LangSn"/>
+								<Space Size="12"/>
+								<TextButton Name="ig" Text="@LangIg"/>
+								<Space Size="12"/>
+								<TextButton Name="hi" Text="@LangHi"/>
+								<Space Size="12"/>
+								<TextButton Name="jw" Text="@LangJw"/>
+								<Space Size="12"/>
+								<TextButton Name="yo" Text="@LangYo"/>
+								<Space Size="12"/>
+								<TextButton Name="zh-CHT" Text="@LangZh-CHT"/>
+ 							</VBoxLayout>
+							<PopAttr ExcluseId="" SizePolicy="" TextAlign=""/>
+							<PopAttr FontFamily="" FontSize="" TextColor=""/>
+						</HBoxLayout>
+					</ScrollArea>
+					<ScrollBar Name="LangScrollBar" SizePolicy="Fix;Spring" Width="8" Type="Vertical" Background="#F7F7F7" BarColor="#CECECE" Delta="5"/>
+				</HBoxLayout>
+				<VBoxLayout SizePolicy="Spring;Fix" Height="20">
+				</VBoxLayout>
+			</VBoxLayout>
+		</VBoxLayout>
+		
+		<Space Name="RightFrame" Size="1"/>
+		</HBoxLayout>
+		<Space Name="BottomFrame" Size="1"/>
+		</VBoxLayout>
+	</Layout>
+</LanguageSelectWnd>

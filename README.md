@@ -1,118 +1,107 @@
-# 有道词典 8.10.8.0（版本锁定版）
+# 有道词典 8.10.8.0 · 免安装便携包
 
-把网易有道词典固定在 **8.10.8.0**，阻止它自动升级到 11.x。
+为网易有道词典 **8.10.8.0** 提供免安装封装、启动脚本与关闭自动更新的辅助措施。
+**非官方发行版，不提供会员权限，不保证旧版在线服务长期可用。**
 
-换电脑后重新克隆本仓库，双击 `start-youdao.cmd` 就能直接使用，不需要装安装包、不需要管理员权限。
+## 普通用户：下载即可使用
 
-## 快速开始（新电脑）
+1. 打开 [最新 Release](https://github.com/astmain/xp-youdao/releases/latest)。
+2. 在 **Assets** 下载 **`YoudaoDict-8.10.8.0-Portable-Windows.zip`**。
+3. **完整解压**到有写入权限的文件夹，例如 `D:\Apps\YoudaoDict`。不要直接在压缩包里运行。
+4. 退出已经运行的其他有道词典，双击 **`start-youdao.cmd`**。
 
-```powershell
-git lfs install
-git clone <本仓库地址> xp-youdao
-cd xp-youdao
-.\start-youdao.cmd
-```
+**Release ZIP 已包含完整运行文件，不需要 Git、Git LFS 或安装包。**
+不要把 GitHub 自动生成的 `Source code (zip)` 当成免安装包使用。
+启动脚本使用 Windows 自带的 PowerShell 5.1；当前封装面向 Windows 桌面环境，未验证 XP 或所有系统版本的兼容性。
 
-也可以直接双击 `start-youdao.cmd`。启动脚本会先重新应用版本锁定、清理残留升级包，再拉起词典。
-
-仓库放在哪个目录都行，路径含中文或空格也没问题。
-
-想让它出现在桌面/开始菜单，再执行一次：
+如需桌面和开始菜单快捷方式，在解压目录执行：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install-shortcuts.ps1
 ```
 
-## 为什么要锁定版本
+### “便携”的范围
 
-程序启动后会在后台拉起升级器 `0YoudaoDictUpt.exe`，从 `cidian.youdao.com/apps/update5/dictupdate.xml` 拉取版本信息，把新版下载成 `YoudaoDict.exe.new`，下次启动时替换掉自己。
+这是**解压即用的免安装包，不是完全不留痕的绿色软件**：
 
-锁定方式做了三道，从弱到强：
+- 程序仍使用 `%LOCALAPPDATA%\Yodao\DeskDict` 保存设置、缓存和用户数据。
+- 启动脚本会设置 `AUTOUPDATE=0`，将 `updaters` 替换成只读占位文件，并调整 `HKCU\Software\Youdao\Dict\Install`。
+- 如果已有相关开机自启动项或卸载记录，脚本会将其指向当前文件夹；不会主动为新用户新增开机启动项。
+- 这些设置属于同一 Windows 用户账号下的共享状态，可能影响其他有道安装。不要同时运行多份副本。
+- 不需要管理员权限。不要放到 `Program Files` 等需要管理员写权限的位置。
 
-| # | 手段 | 作用 |
-|---|------|------|
-| 1 | `config.ini` 里 `AUTOUPDATE=0` | 关闭程序自带的自动更新开关 |
-| 2 | 把 `%LOCALAPPDATA%\Yodao\DeskDict\updaters` 换成同名普通文件 | 升级器无法创建下载目录，这是决定性的一道锁 |
-| 3 | 注册表 `HKCU\Software\Youdao\Dict\Install` 指向仓库目录 | 程序按仓库位置找自己的组件 |
+## 下载校验
 
-实测：只做第 1 道锁时，程序运行约 30 分钟会自己把 `AUTOUPDATE` 改回 1 并开始下载。加上第 2 道锁后，多轮冷启动加长时间运行都没有再出现 `.new` 文件或升级进程。
+Release 同时提供 `SHA256SUMS.txt`。下载后可检查 ZIP 的 SHA-256：
 
-顺带还会把开机自启动项、卸载入口、开始菜单快捷方式都指回本仓库，避免它们停留在 `%LOCALAPPDATA%\Youdao\Dict\Application` 这个会被自动更新删掉的旧目录。
-
-## 目录结构
-
-```
-xp-youdao/
-├─ YoudaoDict.exe          主程序（8.10.8.0）
-├─ YodaoDict.exe           启动器
-├─ InstallHelper.exe       安装辅助
-├─ uninst.exe              卸载程序
-├─ 8.10.8.0/               运行时资源（600 个文件，libcef.dll 走 LFS）
-├─ Stable/                 插件与取词组件
-├─ start-youdao.cmd        一键启动（推荐）
-├─ scripts/
-│   ├─ start-youdao.ps1    启动逻辑
-│   ├─ protect-youdao.ps1  版本锁定（幂等，可单独运行）
-│   └─ install-shortcuts.ps1  创建桌面/开始菜单快捷方式
-├─ .gitattributes          二进制不做换行转换 + LFS 规则
-└─ .gitignore              排除日志、升级包、用户数据
+```powershell
+Get-FileHash .\YoudaoDict-8.10.8.0-Portable-Windows.zip -Algorithm SHA256
 ```
 
-### 刻意不提交的内容
+结果应与 Release 附带的校验文件一致。包内也有逐文件的 `SHA256SUMS.txt` 和记录源代码提交的 `BUILD.txt`。
 
-| 内容 | 原因 |
-|------|------|
-| `debug.log`、`logs/` | 每次启动都写，单个文件可达数百 MB |
-| `*.new`、`11.*` | 自动更新下载的新版安装包，提交了就前功尽弃 |
-| `config.ini`、`cookies.dat`、`user_pic/` | 本机私有设置，换机器不该覆盖对方 |
-| `guid.dat`、`vendor.dat` | 设备标识，程序会自动生成 |
+## 开发者：从仓库运行
 
-## 常用操作
+```powershell
+git lfs install
+git clone https://github.com/astmain/xp-youdao.git
+cd xp-youdao
+git lfs pull
+.\start-youdao.cmd
+```
 
-### 只重新锁定，不启动
+`8.10.8.0/libcef.dll` 使用 Git LFS，完整大小为 **143,979,576 字节**。
+启动脚本会检查版本与运行文件是否完整，再应用防更新措施。
+
+## 防更新方式与验证边界
+
+1. 将配置文件中的 `AUTOUPDATE` 设为 `0`。
+2. 如存在 `updaters` 目录，先改名保留，再创建同名只读普通文件，阻止升级器在该路径创建目录。
+3. 将当前用户注册表里的安装路径指向本文件夹。
+
+历史测试中曾发现用户配置重新变为 `AUTOUPDATE=1` 并再次下载新版；**无法仅凭现有记录确认究竟是哪个操作重置了设置**，因此不把“每 30 分钟必然重置”作为已证实的程序行为。
+此前在一份从 GitHub 全新克隆的副本上，做过清空用户配置后的启动测试和 **32.5 分钟运行观察**，没有发现新升级文件，版本仍为 8.10.8.0。这不等于永久保证。
+
+只修复防更新设置而不启动：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\protect-youdao.ps1
 ```
 
-可重复执行，无副作用。程序内出现更新提示时跑一次即可。
+恢复更新前先退出词典，再删除占位文件并把配置改回 `AUTOUPDATE=1`；再次使用本项目启动脚本会重新关闭更新。
+注意：不要运行版本目录里的 `YoudaoDictInstaller.exe`，它是程序附带的安装辅助工具，不是本项目的推荐启动入口。
 
-### 确认当前没被升级
-
-```powershell
-(Get-Item .\YoudaoDict.exe).VersionInfo.FileVersion
-Get-ChildItem . -Filter *.new
-Select-String "$env:LOCALAPPDATA\Yodao\DeskDict\config.ini" -Pattern AUTOUPDATE
-```
-
-正常结果：`8.10.8.0`、没有 `.new` 文件、`AUTOUPDATE=0`。
-
-### 彻底恢复自动更新（不推荐）
+## 维护与构建 Release
 
 ```powershell
-Remove-Item "$env:LOCALAPPDATA\Yodao\DeskDict\updaters" -Force
+# 确保 Git LFS 文件已拉取，并先提交受版本控制文件的改动
+git lfs pull
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\build-release.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\test-release.ps1 -ZipPath .\dist\YoudaoDict-8.10.8.0-Portable-Windows.zip
 ```
 
-删掉占位文件后，把 `config.ini` 的 `AUTOUPDATE` 改回 `1`。
+构建脚本只选择受 Git 管理的运行文件、启动脚本和说明文档，不递归复制工作目录。
+输出到 `dist/`：ZIP 和 ZIP 的 `SHA256SUMS.txt`。
+同名 ZIP 已存在时会拒绝覆盖，可用 `-OutputDirectory` 指定新目录。
+测试脚本校验包内所有运行文件的哈希、LFS 文件完整性，以及是否夹带日志或个人数据。
 
-## 换电脑时的注意事项
+主要目录：
 
-1. **先装 Git LFS**，否则 `libcef.dll`（137 MB）拉不下来。克隆后确认大小约 143,979,576 字节；若只有一百多字节，说明拿到的是指针，执行 `git lfs pull`。
-
-2. **别把仓库放进需要管理员权限的目录**（如 `C:\Program Files`），程序需以普通用户身份读写自己的目录。
-
-3. **桌面快捷方式不会自动跟过来**，直接用 `start-youdao.cmd`；需要快捷方式可右键发送到桌面。
-
-4. **杀毒软件可能拦截**：程序会写 `HKCU\Software\Youdao\Dict`，属正常行为，允许即可。
-
-5. **不要运行**目录里的 `YoudaoDictInstaller.exe`，那是 11.x 的安装器，会把整个目录替换掉。
-
-## 校验清单
-
-```powershell
-(Get-Item .\YoudaoDict.exe).VersionInfo.FileVersion                      # 期望 8.10.8.0
-Get-ChildItem . -Filter *.new                                            # 期望空
-(Get-Item "$env:LOCALAPPDATA\Yodao\DeskDict\updaters").PSIsContainer     # 期望 False
-(Get-ItemProperty HKCU:\Software\Youdao\Dict).Install                    # 期望本仓库路径
+```text
+YoudaoDict.exe               主程序（8.10.8.0）
+8.10.8.0/                   词库、界面与运行组件
+Stable/                     取词组件等
+start-youdao.cmd             推荐启动入口
+scripts/start-youdao.ps1     启动前检查与版本防护
+scripts/protect-youdao.ps1   当前用户级防更新设置
+scripts/install-shortcuts.ps1  可选快捷方式
+scripts/build-release.ps1   构建 ZIP（仅仓库维护使用）
+scripts/test-release.ps1    校验 ZIP（仅仓库维护使用）
 ```
 
+本机快捷方式、日志、`*.new` 升级文件、`guid.dat`、`vendor.dat`、用户配置和缓存不纳入发布包。
+
+## 第三方权利与安全提示
+
+详见 [第三方软件说明](THIRD-PARTY-NOTICE.md)。有道程序及附带词库、字体、组件等归各自权利人所有，公开仓库不等于这些文件已开源或已核实再分发授权。
+旧版固定使用也意味着不会自动获取新版本安全修复。若安全软件告警，请先核验来源和风险，**不要盲目关闭防护**。

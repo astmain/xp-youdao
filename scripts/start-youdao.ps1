@@ -29,6 +29,17 @@ $exe = Join-Path $RepoRoot 'YoudaoDict.exe'
 if (-not (Test-Path -LiteralPath $exe)) {
     throw "YoudaoDict.exe not found at $exe"
 }
+if ((Get-Item -LiteralPath $exe).VersionInfo.FileVersion -ne '8.10.8.0') {
+    throw 'Expected YoudaoDict.exe version 8.10.8.0.'
+}
+$cef = Join-Path $RepoRoot '8.10.8.0\libcef.dll'
+if (-not (Test-Path -LiteralPath $cef) -or (Get-Item -LiteralPath $cef).Length -ne 143979576) {
+    throw 'Runtime missing or incomplete. Extract the full Release ZIP, or run git lfs pull.'
+}
+$otherCopy = Get-Process YoudaoDict -ErrorAction SilentlyContinue | Where-Object { $_.Path -and $_.Path -ne $exe }
+if ($otherCopy) {
+    throw 'Another copy of Youdao Dict is running. Exit it before starting this folder.'
+}
 
 Write-Host 'Starting Youdao Dict 8.10.8.0 ...' -ForegroundColor Cyan
 

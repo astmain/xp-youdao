@@ -43,3 +43,7 @@ vendor.dat
 _backup/
 .youdao-backup/
 
+# Local shortcuts and release build outputs
+*.lnk
+/dist/
+

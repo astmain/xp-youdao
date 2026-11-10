@@ -42,6 +42,7 @@ foreach ($file in $files) {
 
 New-Item -ItemType Directory -Path $output -Force | Out-Null
 if (Test-Path -LiteralPath $zipPath) { throw "Output already exists: $zipPath (choose another output folder)." }
+Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $zip = [IO.Compression.ZipFile]::Open($zipPath, [IO.Compression.ZipArchiveMode]::Create)
 $sums = New-Object 'System.Collections.Generic.List[string]'
